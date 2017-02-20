@@ -15,7 +15,7 @@ function convert(intergalacticQuantityUnit) {
         .filter(filterSymbols)
         .join(' ');
 
-    // Todo: Fail gracefully if the intergalacticQuantity is empty.
+    // Fail gracefully if the intergalacticQuantity is empty.
     // This means there are no recognised symbols.
     if (intergalacticQuantity.trim() === '') {
         throw new Error('No symbols to convert.');
@@ -23,12 +23,12 @@ function convert(intergalacticQuantityUnit) {
 
     // Find the unit name.
     var unit = intergalacticQuantityUnit.split(' ').filter(function (term) {
-        // // Return only the unit.
-        // console.log('term', term, register('unit', term))
-        // return register('unit', term) !== undefined;
+        // Return only the unit.
         return !filterSymbols(term);
     })[0];
 
+    // Returns an object with the intergalactic quantity
+    // and the name of the stock unit.
     return {
         intergalacticQuantity: intergalacticQuantity,
         unitName: unit.trim()
