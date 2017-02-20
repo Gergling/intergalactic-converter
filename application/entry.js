@@ -1,12 +1,28 @@
 // Take input
+var filePath = process.argv[2];
+
+if (filePath === undefined) {
+    throw 'Please provide a file input.'
+}
+
 var interpret = require('./interpret');
 var fs = require('fs');
-fs.readFile('input.txt', 'utf-8', function (err,data) {
+fs.readFile(filePath, 'utf-8', function (err,data) {
     if (err) {
         throw err;
     }
-    data.split('\n').forEach(interpret.interpret);
 
-    // Run the code to output the questions.
-    console.log(interpret.answers);
+    // Run the interpretation.
+    data.split('\n').forEach(function (phrase) {
+        interpret.interpret(phrase);
+        // Output the questions.
+        console.log(phrase);
+    });
+
+    console.log();
+
+    // Output the answers.
+    interpret.answers.forEach(function (answer) {
+        console.log(answer);
+    });
 });
