@@ -15,10 +15,13 @@ function convert(intergalacticQuantity) {
 
 function unitPrice(intergalacticUnit) {
     var conversion = require('../symbology/convert')(intergalacticUnit);
-    console.log('unit price 1', conversion)
-    console.log('unit price 2', convert(conversion.intergalacticQuantity))
-    console.log('unit price 3', register('unit', conversion.unitName))
-    return convert(conversion.intergalacticQuantity) * register('unit', conversion.unitName);
+    return [
+        intergalacticUnit,
+        'is',
+        convert(conversion.intergalacticQuantity)
+        * register('unit', conversion.unitName),
+        'Credits'
+    ].join(' ');
 }
 
 function numerise(intergalacticQuantity) {
