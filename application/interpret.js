@@ -12,7 +12,7 @@ function interpret(phrase) {
     console.log('interpreting', phrase)
     if (phrase.split('?').length > 1) {
         // Validate whether the question can be understood.
-        require('')
+        answers.push(require('../question/interpret')(phrase.replace('?', '').trim()));
     } else {
         var pair = phrase.split(' is ');
         var value = pair[1].trim();

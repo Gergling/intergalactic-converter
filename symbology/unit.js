@@ -1,34 +1,21 @@
 var register = require('./register');
 var deromanise = require('./deromanise');
+var convert = require('./convert');
+var romanise = require('./romanise');
 
 function unit(intergalacticQuantityUnit, value) {
     // Value is not a roman numeral,
     // so it must be a credit value for a unit.
     var credits = value.replace(' Credits', '') * 1;
 
-    // Find the intergalactic value of the unit
-    // for the credit conversion.
-    var intergalacticQuantity = intergalacticQuantityUnit.split(' ').filter(function (term) {
-        // Return only terms which are intergalactic symbols.
-        var symbol = register('symbol', term);
-        return symbol && deromanise.numerals[symbol];
-    }).join('');
-
-    // Todo: Fail gracefully if the intergalacticQuantity is empty.
-    // This means there are no recognised symbols.
-
-    // Find the unit name.
-    var unit = intergalacticQuantityUnit.split(' ').filter(function (term) {
-        // Return only the unit.
-        return register('unit', term) === undefined;
-    });
+    var intergalacticQuantityUnitParts = convert(intergalacticQuantityUnit);
 
     // Deromanise to find the intergalactic quantity conversion.
-    var quantity = deromanise.convert(intergalacticQuantity);
+    var quantity = deromanise.convert(romanise(intergalacticQuantityUnitParts.intergalacticQuantity));
 
     // Find the credits per single unit.
     return {
-        name: unit,
+        name: intergalacticQuantityUnitParts.unitName,
         value: credits / quantity
     };
 }
