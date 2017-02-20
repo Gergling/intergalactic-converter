@@ -4,12 +4,9 @@ var register = require('../symbology/register');
 
 var answers = [];
 
-console.log(deromanise.numerals)
-
 function interpret(phrase) {
     // If it ends in a question mark, it's a question.
     // Otherwise it's a declaration.
-    console.log('interpreting', phrase)
     if (phrase.split('?').length > 1) {
         // Validate whether the question can be understood.
         answers.push(require('../question/interpret')(phrase.replace('?', '').trim()));
