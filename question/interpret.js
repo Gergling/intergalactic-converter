@@ -18,8 +18,19 @@ function convert(intergalacticQuantity) {
         );
 }
 
-function interpret(question) {
+function (intergalacticUnit) {
+    
+}
 
+function interpret(question) {
+    var answer = 'I have no idea what you are talking about.';
+    var idx = Object.keys(format).filter(function (fmt) {
+        return question.indexOf(fmt) > -1;
+    })[0];
+    if (format[idx] !== undefined) {
+        answer = format[idx](question.replace('idx', ''));
+    }
+    return answer;
 }
 
 module.exports = interpret;

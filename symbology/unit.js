@@ -10,17 +10,17 @@ function unit(intergalacticQuantityUnit, value) {
     // for the credit conversion.
     var intergalacticQuantity = intergalacticQuantityUnit.split(' ').filter(function (term) {
         // Return only terms which are intergalactic symbols.
-        var symbol = register(term);
+        var symbol = register('symbol', term);
         return symbol && deromanise.numerals[symbol];
     }).join('');
 
-    // Todo: Fail gracefully if the unitSymbols is empty.
+    // Todo: Fail gracefully if the intergalacticQuantity is empty.
     // This means there are no recognised symbols.
 
     // Find the unit name.
     var unit = intergalacticQuantityUnit.split(' ').filter(function (term) {
         // Return only the unit.
-        return register(term) === undefined;
+        return register('unit', term) === undefined;
     });
 
     // Deromanise to find the intergalactic quantity conversion.
